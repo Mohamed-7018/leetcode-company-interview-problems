@@ -13,6 +13,9 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Scraper class is responsible for scraping LeetCode problem data from the website.
+ */
 public class Scraper {
     private static final String USERNAME = ""; // Provide your LeetCode username
     private static final String PASSWORD = ""; // Provide your LeetCode password
@@ -21,6 +24,45 @@ public class Scraper {
     WebDriver driver;
     List<String> companyURLs = new ArrayList<>();
 
+
+    
+Certainly! Here are the added JavaDoc comments for the provided code:
+
+java
+Copy code
+import com.opencsv.CSVWriter;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.openqa.selenium.*;
+import org.openqa.selenium.edge.EdgeDriver;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * The Scraper class is responsible for scraping LeetCode problem data from the website.
+ */
+public class Scraper {
+
+    private static final String USERNAME = ""; // Provide your LeetCode username
+    private static final String PASSWORD = ""; // Provide your LeetCode password
+    public static final int QUESTIONS_PAGE_WAIT_MILLIS = 25000;
+    public static final int LOGIN_PAGE_WAIT_MILLIS = 2000;
+    WebDriver driver;
+    List<String> companyURLs = new ArrayList<>();
+
+    /**
+     * Sets up the WebDriver and logs in to the LeetCode account.
+     *
+     * @throws InterruptedException Thrown when a thread is waiting, sleeping, or otherwise occupied
+     * @throws IOException          Signals that an I/O exception has occurred
+     */
     public void setup() throws InterruptedException, IOException {
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
@@ -46,6 +88,15 @@ public class Scraper {
         }
     }
 
+
+    
+    /**
+     * Visits a specific company's LeetCode page and extracts problem data.
+     *
+     * @param companyURL The URL of the company's LeetCode page
+     * @throws InterruptedException Thrown when a thread is waiting, sleeping, or otherwise occupied
+     * @throws IOException          Signals that an I/O exception has occurred
+     */
     private void visitCompanies(String companyURL) throws InterruptedException, IOException {
         String companyName = companyURL.substring(companyURL.lastIndexOf("/") + 1);
         System.out.println("Visiting " + companyURL);
